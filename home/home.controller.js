@@ -10,7 +10,7 @@
         $scope.parkingMarkers = [];
         $scope.loadParkingInBoudingMap = loadParkingInBoudingMap;
         $scope.getParkingInBoundingMap = getParkingInBoundingMap;
-        $scope.processData = processData;
+        $scope._jqjsp = _jqjsp;
         $scope.initMap = initMap;
         $scope.clearCurrentParkingMarkers = clearCurrentParkingMarkers;
         initController();
@@ -37,14 +37,14 @@
             var ne = bounds.getNorthEast();	
             var locStr = ne.lat() + "|" + ne.lng() + "|" + sw.lat() + "|" + sw.lng();
             var chk = PimConfig.getCHK(locStr);
-            let url = "https://api.parkme.com/lots?pub_id=x09e4f%24&chk="+chk+"&limit=250&offset=0&rate_request=&paddedViewBounds=2.5&box="+ locStr + "&entry_time=2018-01-11T09%3A00&duration=60&locale=&callback=processData&_1515636906918=";
+            let url = "https://api.parkme.com/lots?pub_id=x09e4f%24&chk="+chk+"&limit=250&offset=0&rate_request=&paddedViewBounds=2.5&box="+ locStr + "&entry_time=2018-01-11T09%3A00&duration=60&locale=&callback=_jqjsp&_1515636906918=";
             $http.get(url).success(function (res) {
 				eval(res);				
 			})
             .error(function () {
             });
         }
-        function processData(data){
+        function _jqjsp(data){
             clearCurrentParkingMarkers();
             $.each(data.result, function(i, e){
 
